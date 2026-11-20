@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hamed MOCTAR MOHAMED — BTS SIO SISR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f8fafc;--bg2:#eef2f7;--bg3:#e2eaf4;--bg4:#d5e0ef;
+  --border:rgba(10,40,100,0.10);--border2:rgba(10,40,100,0.22);--border3:rgba(10,40,100,0.45);
+  --text:#0a1628;--muted:#6b7fa0;--muted2:#2d4a72;
+  --accent:#1251a3;--accent2:#c47a0a;--green:#0a7a52;--red:#b91c1c;--purple:#5b21b6;
+  --mono:'IBM Plex Mono',monospace;--sans:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:300;line-height:1.7;font-size:15px;overflow-x:hidden}
+
+/* canvas bg */
+#particles-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:1}
+
+/* scanlines cyber */
+body::after{content:'';position:fixed;inset:0;background:none;pointer-events:none;z-index:998}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(248,250,252,0.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border2);padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;height:52px}
+.nav-logo{font-family:var(--mono);font-size:13px;color:var(--accent);text-decoration:none;letter-spacing:.06em;display:flex;align-items:center;gap:.5rem;position:relative;z-index:1}
+.nav-logo::before{content:'>';color:var(--accent2);animation:blink 1.2s infinite}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--muted2);text-decoration:none;text-transform:uppercase;transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--accent);transition:width .25s}
+.nav-links a:hover{color:var(--accent)}
+.nav-links a:hover::after{width:100%}
+.nav-pill{font-family:var(--mono);font-size:10px;color:var(--green);border:1px solid rgba(10,122,82,0.25);padding:3px 10px;letter-spacing:.08em;display:flex;align-items:center;gap:.5rem}
+.nav-pill::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;align-items:center;padding:5rem 2.5rem 3rem;position:relative;overflow:hidden;z-index:2}
+.hero-glow{position:absolute;top:20%;right:10%;width:500px;height:500px;background:radial-gradient(circle,rgba(18,81,163,0.04) 0%,transparent 70%);pointer-events:none;animation:pulse-glow 4s ease-in-out infinite}
+@keyframes pulse-glow{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.1);opacity:1}}
+.hero-grid-overlay{position:absolute;inset:0;background-image:linear-gradient(rgba(18,81,163,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(18,81,163,0.06) 1px,transparent 1px);background-size:50px 50px;mask-image:radial-gradient(ellipse 80% 80% at 70% 50%,black,transparent);pointer-events:none}
+.hero-inner{max-width:1100px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 420px;gap:5rem;align-items:center;position:relative;z-index:2}
+.hero-eyebrow{font-family:var(--mono);font-size:11px;color:var(--accent2);letter-spacing:.12em;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:.75rem}
+.hero-eyebrow::before{content:'';display:inline-block;width:20px;height:1px;background:var(--accent2)}
+.hero h1{font-family:var(--mono);font-size:clamp(2.4rem,3.8vw,3.8rem);font-weight:700;line-height:1.0;letter-spacing:-.025em;margin-bottom:.75rem}
+.hero h1 .line1{color:var(--muted2);font-size:.6em;display:block;letter-spacing:.05em;font-weight:400;margin-bottom:.25rem}
+.hero h1 .name-hi{color:var(--text)}
+.hero h1 .name-ac{color:var(--accent)}
+.hero-role{font-family:var(--mono);font-size:12px;color:var(--accent);border:1px solid var(--border2);display:inline-flex;align-items:center;gap:.6rem;padding:.35rem .85rem;margin-bottom:1.4rem;letter-spacing:.06em}
+.hero-role::before{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%;animation:blink 1.5s infinite}
+.hero-desc{color:var(--muted2);line-height:1.9;margin-bottom:2.5rem;font-size:14px;max-width:480px}
+.hero-desc strong{color:var(--text);font-weight:500}
+.hero-stats{display:flex;gap:2.5rem;margin-bottom:2.5rem}
+.stat-item{text-align:left}
+.stat-num{font-family:var(--mono);font-size:1.8rem;font-weight:700;color:var(--accent);line-height:1}
+.stat-label{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:.25rem}
+.hero-cta{display:flex;gap:.75rem;flex-wrap:wrap}
+.btn{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:.75rem 1.5rem;text-decoration:none;border:1px solid var(--border2);color:var(--muted2);transition:all .2s;display:inline-flex;align-items:center;gap:.5rem;position:relative;overflow:hidden}
+.btn::before{content:'';position:absolute;left:-100%;top:0;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(16,86,184,0.05),transparent);transition:left .4s}
+.btn:hover::before{left:100%}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn-primary{border-color:var(--accent);color:var(--accent)}
+.btn-primary:hover{background:rgba(18,81,163,0.08)}
+
+/* Terminal */
+.hero-terminal{background:var(--bg3);border:1px solid var(--border2);font-family:var(--mono);font-size:12px;overflow:hidden;box-shadow:0 4px 24px rgba(10,40,100,0.10);transition:box-shadow .3s}
+.hero-terminal:hover{box-shadow:0 6px 32px rgba(10,40,100,0.15)}
+.term-bar{background:var(--bg4);padding:.55rem 1rem;display:flex;align-items:center;gap:.5rem;border-bottom:1px solid var(--border2)}
+.term-dot{width:10px;height:10px;border-radius:50%}
+.term-title{color:var(--muted);font-size:11px;margin-left:.5rem;flex:1}
+.term-ping{font-size:10px;color:var(--green);animation:blink 1.5s infinite}
+.term-body{padding:1.25rem 1.5rem;line-height:2.1}
+.term-line{display:flex;gap:.75rem}
+.term-dollar{color:var(--accent2)}
+.term-cmd{color:var(--accent)}
+.term-out{color:var(--muted2);padding-left:1.5rem}
+.term-out.g{color:var(--green)}
+.term-out.y{color:var(--accent2)}
+.term-out.r{color:var(--red)}
+.term-cursor{display:inline-block;width:8px;height:14px;background:var(--accent);animation:blink .8s infinite;vertical-align:middle;margin-left:2px}
+
+/* ── SECTION ── */
+.section{padding:5.5rem 2.5rem;max-width:1100px;margin:0 auto;position:relative;z-index:2}
+.s-header{display:flex;align-items:center;gap:1.25rem;margin-bottom:3rem}
+.s-num{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:.2em;min-width:30px}
+.s-title{font-family:var(--mono);font-size:1.35rem;font-weight:700}
+.s-line{flex:1;height:1px;background:linear-gradient(to right,var(--border2),transparent)}
+
+/* ── DIVIDER BANNER ── */
+.divider-banner{border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);padding:.7rem 0;overflow:hidden;white-space:nowrap;background:var(--bg3);position:relative;z-index:2}
+.divider-track{display:inline-flex;gap:3rem;animation:marquee 25s linear infinite;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.1em}
+.divider-track span{color:var(--accent2)}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── SKILLS ── */
+.skills-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border2)}
+.skill-cell{background:var(--bg);padding:1.75rem 2rem;border-top:2px solid transparent;transition:all .3s;cursor:default;position:relative;overflow:hidden}
+.skill-cell::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(16,86,184,0.03),transparent);opacity:0;transition:opacity .3s}
+.skill-cell:hover{background:var(--bg2);border-top-color:var(--accent)}
+.skill-cell:hover::after{opacity:1}
+.skill-cat{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.5rem}
+.skill-cell h3{font-size:14px;font-weight:500;margin-bottom:.85rem;color:var(--text)}
+.tags{display:flex;flex-wrap:wrap;gap:.35rem}
+.tag{font-family:var(--mono);font-size:10px;padding:3px 8px;border:1px solid var(--border2);color:var(--muted2);letter-spacing:.04em;transition:all .2s;cursor:default}
+.tag:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+
+/* ── TIMELINE ── */
+.timeline{position:relative;padding-left:2rem}
+.timeline::before{content:'';position:absolute;left:.5px;top:.5rem;bottom:0;width:1px;background:linear-gradient(to bottom,var(--accent),transparent)}
+.tl-item{position:relative;margin-bottom:3.5rem;transition:transform .2s}
+.tl-item:hover{transform:translateX(4px)}
+.tl-item::before{content:'';position:absolute;left:-2.35rem;top:.45rem;width:8px;height:8px;border:1px solid var(--accent);background:var(--bg);transform:rotate(45deg);transition:background .2s,box-shadow .2s}
+.tl-item:hover::before{background:var(--accent);box-shadow:0 0 10px rgba(16,86,184,0.35)}
+.tl-date{font-family:var(--mono);font-size:11px;color:var(--accent2);letter-spacing:.08em;margin-bottom:.3rem}
+.tl-item h3{font-size:16px;font-weight:500;margin-bottom:.15rem}
+.tl-place{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:.75rem}
+.tl-item ul{list-style:none}
+.tl-item ul li{font-size:13.5px;color:var(--muted2);padding-left:1.25rem;position:relative;margin-bottom:.3rem;line-height:1.6}
+.tl-item ul li::before{content:'//';position:absolute;left:0;color:var(--border3);font-family:var(--mono);font-size:10px;top:.25rem}
+
+/* ── PARCOURS ── */
+.parcours-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}
+.parcours-card{background:var(--bg2);border:1px solid var(--border);border-left:2px solid var(--accent);padding:1.5rem 1.75rem;transition:all .3s;position:relative;overflow:hidden}
+.parcours-card::before{content:'';position:absolute;right:-30px;top:-30px;width:80px;height:80px;border-radius:50%;background:radial-gradient(circle,rgba(16,86,184,0.05),transparent);transition:all .3s}
+.parcours-card:hover{background:var(--bg3);transform:translateY(-2px);box-shadow:0 8px 30px rgba(10,40,100,0.08)}
+.parcours-card:hover::before{right:-10px;top:-10px}
+.parcours-year{font-family:var(--mono);font-size:11px;color:var(--accent2);margin-bottom:.4rem}
+.parcours-card h3{font-size:15px;font-weight:500;margin-bottom:.25rem;line-height:1.4}
+.parcours-org{font-family:var(--mono);font-size:11px;color:var(--muted)}
+
+/* ── CERTIFS ── */
+.certif-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--border2)}
+.certif-card{background:var(--bg);padding:1.75rem 2rem;transition:all .2s;position:relative;overflow:hidden}
+.certif-card:hover{background:var(--bg2)}
+.certif-card::after{content:'✓';position:absolute;right:1.5rem;top:1.5rem;font-family:var(--mono);font-size:2rem;color:rgba(14,122,90,0.10);font-weight:700}
+.certif-ok{font-family:var(--mono);font-size:10px;color:var(--green);letter-spacing:.12em;margin-bottom:.5rem}
+.certif-card h3{font-size:14px;font-weight:500;margin-bottom:.3rem;line-height:1.4}
+.certif-by{font-family:var(--mono);font-size:11px;color:var(--muted)}
+
+/* ── VEILLE TECHNO ── */
+.veille-problematique{background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--accent2);padding:1.5rem 2rem;margin-bottom:2.5rem;transition:border-color .2s}
+.veille-problematique:hover{border-left-color:var(--accent)}
+.veille-label{font-family:var(--mono);font-size:10px;color:var(--accent2);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.6rem}
+.veille-problematique p{font-size:14px;color:var(--muted2);font-style:italic;line-height:1.7}
+.articles-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+.article-card{background:var(--bg2);border:1px solid var(--border);padding:1.5rem;transition:all .3s;text-decoration:none;display:block;color:inherit;position:relative;overflow:hidden}
+.article-card::before{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:linear-gradient(to right,var(--accent),var(--accent2));transition:width .3s}
+.article-card:hover{border-color:var(--border2);background:var(--bg3);transform:translateY(-3px);box-shadow:0 10px 30px rgba(10,40,100,0.10)}
+.article-card:hover::before{width:100%}
+.article-meta{display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem}
+.article-source{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:.08em;background:rgba(18,81,163,0.08);padding:2px 8px;border:1px solid var(--border2)}
+.article-date{font-family:var(--mono);font-size:10px;color:var(--muted)}
+.article-card h3{font-size:13.5px;font-weight:500;margin-bottom:.5rem;color:var(--text);line-height:1.4}
+.article-card p{font-size:12.5px;color:var(--muted2);line-height:1.6}
+.article-tag{font-family:var(--mono);font-size:10px;padding:2px 7px;border:1px solid var(--border2);color:var(--muted);margin-top:.75rem;display:inline-block}
+.article-arrow{position:absolute;top:1.5rem;right:1.5rem;font-size:14px;color:var(--border2);transition:all .3s}
+.article-card:hover .article-arrow{color:var(--accent);transform:translate(3px,-3px)}
+.veille-conclusion{background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--green);padding:1.5rem 2rem;margin-top:2rem}
+.veille-conclusion h3{font-family:var(--mono);font-size:12px;color:var(--green);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.6rem}
+.veille-conclusion p{font-size:13.5px;color:var(--muted2);line-height:1.75}
+
+/* ── GRILLE E5 PDF ── */
+.grille-pdf-section{background:var(--bg2);border:1px solid var(--border2);padding:2.5rem;display:flex;align-items:center;gap:2.5rem;margin-bottom:2rem;transition:border-color .2s}
+.grille-pdf-section:hover{border-color:var(--accent)}
+.pdf-icon{width:64px;height:80px;background:var(--bg3);border:1px solid var(--border2);display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;position:relative;transition:all .2s}
+.pdf-icon::before{content:'';position:absolute;top:0;right:0;border-left:12px solid var(--bg2);border-bottom:12px solid var(--bg3)}
+.pdf-ext{font-family:var(--mono);font-size:11px;color:var(--red);letter-spacing:.08em;font-weight:700}
+.pdf-info{flex:1}
+.pdf-info h3{font-size:16px;font-weight:500;margin-bottom:.35rem;color:var(--text)}
+.pdf-info p{font-size:13px;color:var(--muted2);margin-bottom:1rem}
+.pdf-actions{display:flex;gap:.75rem;flex-wrap:wrap}
+.pdf-btn{font-family:var(--mono);font-size:11px;padding:.5rem 1.1rem;border:1px solid var(--border2);color:var(--muted2);text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:.4rem;cursor:pointer;background:none}
+.pdf-btn:hover{border-color:var(--accent);color:var(--accent)}
+.pdf-btn.primary{border-color:var(--accent);color:var(--accent)}
+.pdf-btn.primary:hover{background:rgba(18,81,163,0.08)}
+/* PDF viewer */
+.pdf-viewer{width:100%;height:600px;border:1px solid var(--border2);background:var(--bg2);display:none}
+.pdf-viewer.open{display:block}
+.grille-note{font-family:var(--mono);font-size:12px;color:var(--muted);padding:1rem;border:1px dashed var(--border2);margin-top:1rem;line-height:1.7}
+
+/* ── CONTACT ── */
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.contact-intro{font-size:14px;color:var(--muted2);line-height:1.9;margin-bottom:.5rem}
+.contact-links{display:flex;flex-direction:column;gap:.75rem}
+.clink{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;border:1px solid var(--border2);background:var(--bg2);text-decoration:none;color:var(--text);transition:all .2s;position:relative;overflow:hidden}
+.clink::before{content:'';position:absolute;left:0;top:0;height:100%;width:0;background:rgba(18,81,163,0.04);transition:width .3s}
+.clink:hover::before{width:100%}
+.clink:hover{border-color:var(--accent)}
+.clink-icon{font-family:var(--mono);font-size:16px;color:var(--accent);min-width:22px;text-align:center;transition:transform .2s}
+.clink:hover .clink-icon{transform:scale(1.2)}
+.clink-label{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px}
+.clink-val{font-size:13.5px}
+
+
+
+/* ── CHATBOT ── */
+#chat-toggle{position:fixed;bottom:2rem;right:2rem;z-index:400;width:54px;height:54px;background:linear-gradient(135deg,#1251a3,#1a6abf);border:1px solid rgba(18,81,163,0.4);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .25s;outline:none;box-shadow:0 4px 20px rgba(18,81,163,0.25)}
+#chat-toggle:hover{box-shadow:0 4px 30px rgba(18,81,163,0.4);transform:translateY(-2px)}
+#chat-toggle svg{width:24px;height:24px;transition:transform .2s}
+#chat-toggle:hover svg{transform:scale(1.1)}
+#chat-box{position:fixed;bottom:6.5rem;right:2rem;z-index:400;width:350px;background:var(--bg);border:1px solid var(--border2);display:none;flex-direction:column;font-family:var(--mono);box-shadow:0 20px 60px rgba(0,0,0,0.6);transform:translateY(10px);transition:transform .2s,opacity .2s;opacity:0}
+#chat-box.open{display:flex;transform:translateY(0);opacity:1}
+.chat-head{background:var(--bg3);border-bottom:1px solid var(--border2);padding:.8rem 1rem;display:flex;align-items:center;justify-content:space-between}
+.chat-title{font-size:12px;color:var(--accent);letter-spacing:.06em;display:flex;align-items:center;gap:.6rem}
+.chat-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 2s infinite}
+#chat-close{background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;line-height:1;transition:color .2s}
+#chat-close:hover{color:var(--text)}
+#chat-msgs{height:300px;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:.75rem;scroll-behavior:smooth}
+#chat-msgs::-webkit-scrollbar{width:3px}
+#chat-msgs::-webkit-scrollbar-thumb{background:var(--border2)}
+.msg{font-size:12px;line-height:1.65;max-width:88%;padding:.65rem .9rem;animation:msg-in .2s ease}
+@keyframes msg-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.msg.bot{background:var(--bg2);color:var(--muted2);align-self:flex-start;border-left:2px solid var(--accent)}
+.msg.user{background:rgba(18,81,163,0.08);color:var(--text);align-self:flex-end;border-right:2px solid var(--accent2)}
+.msg.typing .dots::after{content:'...';animation:typing-dots 1s infinite}
+@keyframes typing-dots{0%{content:'.'}33%{content:'..'}66%{content:'...'}}
+.chat-sugs{padding:.6rem .9rem;display:flex;flex-wrap:wrap;gap:.35rem;border-top:1px solid var(--border2);background:var(--bg2)}
+.sug{font-family:var(--mono);font-size:10px;padding:3px 8px;border:1px solid var(--border2);color:var(--muted2);background:none;cursor:pointer;transition:all .15s;white-space:nowrap}
+.sug:hover{border-color:var(--accent);color:var(--accent)}
+.chat-input-row{border-top:1px solid var(--border2);display:flex}
+#chat-input{flex:1;background:transparent;border:none;padding:.75rem 1rem;font-family:var(--mono);font-size:12px;color:var(--text);outline:none}
+#chat-input::placeholder{color:var(--muted)}
+#chat-send{background:none;border:none;border-left:1px solid var(--border2);padding:.75rem 1rem;color:var(--accent);cursor:pointer;font-family:var(--mono);font-size:11px;transition:background .2s;letter-spacing:.05em}
+#chat-send:hover{background:rgba(18,81,163,0.06)}
+
+
+/* ── SITUATIONS PRO ── */
+.sp-card{background:var(--bg2);border:1px solid var(--border);margin-bottom:1.25rem;overflow:hidden;transition:border-color .2s}
+.sp-card:hover{border-color:var(--border2)}
+.sp-header{padding:1.25rem 1.75rem;cursor:pointer;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;user-select:none;transition:background .2s}
+.sp-header:hover{background:var(--bg3)}
+.sp-meta{display:flex;align-items:center;gap:.6rem;flex-shrink:0}
+.sp-num{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.1em;background:rgba(18,81,163,0.08);border:1px solid var(--border2);padding:2px 8px}
+.sp-tag{font-family:var(--mono);font-size:10px;color:var(--accent2);background:rgba(196,122,10,0.08);border:1px solid rgba(196,122,10,0.2);padding:2px 8px;letter-spacing:.06em}
+.sp-title{font-size:15px;font-weight:500;flex:1;color:var(--text);margin:0}
+.sp-place{font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap}
+.sp-toggle{font-family:var(--mono);font-size:14px;color:var(--muted);transition:transform .3s;flex-shrink:0}
+.sp-header.open .sp-toggle{transform:rotate(180deg)}
+.sp-body{display:none;padding:0 1.75rem 1.75rem;border-top:1px solid var(--border)}
+.sp-body.open{display:block}
+.sp-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.25rem}
+.sp-block{background:var(--bg3);border:1px solid var(--border);padding:1.1rem 1.25rem}
+.sp-block-full{grid-column:1/-1}
+.sp-block-title{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.6rem}
+.sp-block p,.sp-block ol{font-size:13px;color:var(--muted2);line-height:1.7}
+.sp-block ol{padding-left:1.25rem}
+.sp-block ol li{margin-bottom:.25rem}
+.sp-block strong{color:var(--text);font-weight:500}
+@media(max-width:700px){.sp-grid{grid-template-columns:1fr}.sp-place{display:none}}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--border2);padding:2rem 2.5rem;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:11px;color:var(--muted);position:relative;z-index:2;background:var(--bg2)}
+.footer-right{display:flex;align-items:center;gap:.5rem}
+.footer-right::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green)}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-20px);transition:opacity .55s ease,transform .55s ease}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+
+/* ── CURSOR TRAIL ── */
+.cursor-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);position:fixed;pointer-events:none;z-index:9999;opacity:0;transition:opacity .3s}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .hero-inner,.contact-wrap{grid-template-columns:1fr;gap:3rem}
+  .hero-terminal{display:none}
+  .skills-wrap{grid-template-columns:1fr 1fr}
+  .articles-grid{grid-template-columns:1fr}
+  nav{padding:0 1.25rem}
+  .nav-links{gap:1.2rem}
+  .section{padding:4rem 1.25rem}
+  .nav-pill{display:none}
+  #chat-box{width:calc(100vw - 2rem);right:1rem}
+  .grille-pdf-section{flex-direction:column;text-align:center}
+  .hero-stats{gap:1.5rem}
+}
+@media(max-width:600px){.skills-wrap{grid-template-columns:1fr}}
+
+/* ── INFRA ── */
+.z-int{--zc:var(--green)}.z-dmz{--zc:var(--accent2)}.z-ext{--zc:#b0235f}.z-fw{--zc:var(--accent2)}
+.infra-intro{background:var(--bg2);border:1px solid var(--border2);padding:1.5rem 1.75rem;font-size:14px;color:var(--muted2);line-height:1.8}
+.infra-intro strong{color:var(--text);font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem}.chip{font:11px var(--mono);padding:4px 10px;border:1px solid var(--border2);color:var(--accent);background:rgba(18,81,163,.06)}
+.zf{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin:1.5rem 0 1rem}
+.zf button{font:11px var(--mono);letter-spacing:.06em;padding:.55rem 1rem;border:1px solid var(--zc,var(--border2));background:none;color:var(--muted2);cursor:pointer;transition:all .2s}
+.zf button:hover{background:var(--bg3)}.zf button.on{background:var(--zc,var(--accent));color:#fff;border-color:var(--zc,var(--accent))}
+.zf .sim{margin-left:auto;border-color:var(--accent);color:var(--accent)}.zf .sim:hover{background:rgba(18,81,163,.08)}
+.schema{border:1px solid var(--border2);background:var(--bg2);overflow-x:auto}.schema svg{width:100%;min-width:680px;height:auto;display:block}
+.zone{fill:var(--zc);fill-opacity:.05;stroke:var(--zc);stroke-width:1.6;stroke-dasharray:7 5}.zl{font:600 10px var(--mono);letter-spacing:.08em;fill:var(--zc)}
+.zg,.nd{transition:opacity .3s}.dim{opacity:.15}
+.nd{cursor:pointer;outline:none}.nd rect{fill:var(--bg);stroke:var(--zc);stroke-width:1.8;transition:all .2s}
+.nd:hover rect,.nd:focus rect,.nd.sel rect{stroke-width:3;filter:drop-shadow(0 4px 8px rgba(10,40,100,.28))}.nd.sel rect{fill:var(--bg3)}
+.nd .n{font:700 9px var(--mono);fill:var(--text)}.nd .ip{font:8px var(--mono);fill:var(--muted2)}
+.lnk{fill:none;stroke-width:2.2;stroke-dasharray:6 6;animation:dash 1.1s linear infinite}@keyframes dash{to{stroke-dashoffset:-24}}
+.pk{fill:var(--accent);opacity:0;filter:drop-shadow(0 0 5px var(--accent))}
+.info{padding:1rem 1.5rem;border-top:1px solid var(--border2);font-size:13px;color:var(--muted2);min-height:4.5rem;background:var(--bg);line-height:1.7}.info b{color:var(--text)}
+.srv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:1rem;margin-top:1.5rem}
+.srv{background:var(--bg2);border:1px solid var(--border);border-top:3px solid var(--zc);padding:1.1rem 1.2rem;cursor:pointer;transition:all .25s}
+.srv:hover,.srv.sel{transform:translateY(-3px);border-color:var(--zc);box-shadow:0 8px 24px rgba(10,40,100,.12)}.srv.hid{display:none}
+.srv h4{font-size:14px;font-weight:500}.srv .ip{font:11px var(--mono);color:var(--green)}
+.zt{font:9px var(--mono);letter-spacing:.1em;padding:2px 8px;border:1px solid var(--zc);color:var(--zc);display:inline-block;margin:.55rem 0}
+.srv p{font-size:12.5px;color:var(--muted2);line-height:1.6;margin-bottom:.6rem}
+.keys{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1.5rem}
+.key{text-align:center;padding:1.4rem 1rem;border:1px solid var(--border2);background:var(--bg2);transition:transform .25s}.key:hover{transform:translateY(-3px)}
+.key div{font-size:26px}.key h4{font:700 11px var(--mono);letter-spacing:.1em;margin:.5rem 0 .25rem}.key p{font-size:12px;color:var(--muted2)}
+@media(max-width:900px){.keys{grid-template-columns:1fr 1fr}.zf .sim{margin-left:0}}
+/* ── TABLEAU E5 ── */
+.xl-wrap{display:none;margin-top:1rem;overflow:auto;max-height:680px;border:1px solid var(--border2);background:#fff}.xl-wrap.open{display:block}
+.xl{border-collapse:collapse;min-width:1100px;width:100%;font:12px var(--sans);color:#0a1628}
+.xl td,.xl th{border:1px solid #9fb0c8;padding:.5rem .6rem;vertical-align:top}.xl th{background:#e2eaf4;font-weight:600;text-align:center}
+.xl .sec{background:#d5e0ef;font-weight:600}.xl .bl{font-size:11px;line-height:1.5}.xl .e td{height:34px}.xl hr{border:0;border-top:1px solid #9fb0c8;margin:.5rem 0}
+
+.prog{margin-top:1rem;font:11px var(--mono);color:var(--muted2)}.bar{height:5px;background:var(--bg3);margin-top:.4rem}.bar i{display:block;height:100%;width:0;background:var(--green);transition:width .5s}
+.st-dot{stroke:#fff;stroke-width:1.5}.st-ok{fill:#0a7a52}.st-wip{fill:#c47a0a}.st-plan{fill:#8aa0bd}
+.nd.plan rect{stroke-dasharray:5 3}.nd.nomatch{opacity:.15}
+.stt{font:10px var(--mono);margin-left:.5rem;color:var(--muted2)}
+.notes{display:none;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem}.notes.on{display:grid}
+.note{padding:1rem 1.25rem;border:1px solid var(--border2);border-left:4px solid var(--c);background:var(--bg2);font-size:12.5px;line-height:1.7;color:var(--muted2)}.note b{color:var(--text)}
+@media(max-width:900px){.notes{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- PARTICLES CANVAS -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">HAMED_MM</a>
+  <ul class="nav-links">
+    <li><a href="#competences">Skills</a></li>
+    <li><a href="#experiences">XP</a></li>
+    <li><a href="#parcours">Formation</a></li>
+    <li><a href="#situations">Situations</a></li>
+    <li><a href="#infra">Infra</a></li>
+    <li><a href="#veille">Veille</a></li>
+    <li><a href="#grille">Grille E5</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <span class="nav-pill">SISR · Cybersécurité</span>
+</nav>
+
+<!-- HERO -->
+<div id="hero" class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-grid-overlay"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">Étudiant BTS SIO — Option SISR</div>
+      <h1>
+        <span class="line1">Hamed</span>
+        <span class="name-hi">Moctar </span><span class="name-ac">Mohamed</span>
+      </h1>
+      <div class="hero-role">Sécurité Informatique · Systèmes & Réseaux</div>
+      <p class="hero-desc">Passionné par la <strong>cybersécurité</strong>, la protection des infrastructures réseau et l'administration des systèmes d'information. Formé au Lycée Jacques Brel (Vénissieux), basé à Francheville — Lyon.</p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num" data-target="5">0</div>
+          <div class="stat-label">Certifications</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" data-target="4">0</div>
+          <div class="stat-label">Stages / XP</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" data-target="6">0</div>
+          <div class="stat-label">Domaines maîtrisés</div>
+        </div>
+      </div>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-primary">→ Me contacter</a>
+        <a href="#competences" class="btn">Explorer mes compétences</a>
+      </div>
+    </div>
+    <div class="hero-terminal">
+      <div class="term-bar">
+        <div class="term-dot" style="background:#f87171"></div>
+        <div class="term-dot" style="background:#f59e0b"></div>
+        <div class="term-dot" style="background:#22d3a0"></div>
+        <span class="term-title">hamed@bts-sisr ~ </span>
+        <span class="term-ping">● LIVE</span>
+      </div>
+      <div class="term-body" id="terminal-body">
+        <!-- Rempli par JS -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DIVIDER -->
+<div class="divider-banner">
+  <div class="divider-track" id="marquee-track">
+    <span>//</span> WINDOWS SERVER <span>·</span> ACTIVE DIRECTORY <span>·</span> PROXMOX <span>·</span> VLAN <span>·</span> IPSEC <span>·</span> WIRESHARK <span>·</span> SPLUNK <span>·</span> OPENPGP <span>·</span> CISCO <span>·</span> IPFIRE <span>·</span> PYTHON <span>·</span> BASH <span>·</span> SECNUMACADÉMIE <span>//</span> WINDOWS SERVER <span>·</span> ACTIVE DIRECTORY <span>·</span> PROXMOX <span>·</span> VLAN <span>·</span> IPSEC <span>·</span> WIRESHARK <span>·</span> SPLUNK <span>·</span> OPENPGP <span>·</span> CISCO <span>·</span> IPFIRE <span>·</span> PYTHON <span>·</span> BASH <span>·</span> SECNUMACADÉMIE <span>//</span>
+  </div>
+</div>
+
+<!-- COMPETENCES -->
+<section id="competences" class="section">
+  <div class="s-header reveal">
+    <span class="s-num">01</span>
+    <h2 class="s-title">Compétences</h2>
+    <div class="s-line"></div>
+  </div>
+  <div class="skills-wrap reveal">
+    <div class="skill-cell">
+      <div class="skill-cat">Systèmes</div>
+      <h3>Administration & Virtualisation</h3>
+      <div class="tags">
+        <span class="tag">Windows Server</span><span class="tag">Active Directory</span><span class="tag">GPO</span><span class="tag">BitLocker</span><span class="tag">AppLocker</span><span class="tag">Ubuntu Server</span><span class="tag">Debian</span><span class="tag">Proxmox</span><span class="tag">VMware</span><span class="tag">VirtualBox</span>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cat">Réseaux</div>
+      <h3>Protocoles & Infrastructure</h3>
+      <div class="tags">
+        <span class="tag">VLAN</span><span class="tag">IPv4/IPv6</span><span class="tag">DHCP</span><span class="tag">DNS</span><span class="tag">IPFire</span><span class="tag">Cisco Packet Tracer</span><span class="tag">Wireshark</span><span class="tag">TCPdump</span><span class="tag">FTP</span><span class="tag">Routage inter-VLAN</span>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cat">Cybersécurité</div>
+      <h3>Sécurisation & Analyse</h3>
+      <div class="tags">
+        <span class="tag">OpenPGP</span><span class="tag">S-MIME</span><span class="tag">VirusTotal</span><span class="tag">Splunk</span><span class="tag">Apache Bench</span><span class="tag">Détection DDoS</span><span class="tag">PIA</span><span class="tag">Thunderbird</span>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cat">Développement</div>
+      <h3>Langages & Frameworks</h3>
+      <div class="tags">
+        <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Bash</span><span class="tag">HTML/CSS</span><span class="tag">JavaScript</span><span class="tag">C++</span><span class="tag">C#</span><span class="tag">Bootstrap</span><span class="tag">WordPress</span><span class="tag">Dolibarr</span>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cat">Sauvegarde</div>
+      <h3>Backup & Restauration</h3>
+      <div class="tags">
+        <span class="tag">Cobian Reflector</span><span class="tag">Windows Server Backup</span><span class="tag">Stratégies restauration</span>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cat">Méthodes & Outils</div>
+      <h3>Modélisation & Productivité</h3>
+      <div class="tags">
+        <span class="tag">UML</span><span class="tag">Merise</span><span class="tag">itop</span><span class="tag">VS Code</span><span class="tag">Office 365</span><span class="tag">GameShell</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCES -->
+<section id="experiences" class="section">
+  <div class="s-header reveal">
+    <span class="s-num">02</span>
+    <h2 class="s-title">Expériences</h2>
+    <div class="s-line"></div>
+  </div>
+  <div class="timeline">
+    <div class="tl-item reveal">
+      <div class="tl-date">Mai 2026 — Aujourd'hui</div>
+      <h3>Stagiaire — Informatique & Réseau</h3>
+      <div class="tl-place">Armée du Salut — Lyon Cité</div>
+      <ul>
+        <li>Stage en cours — administration système et réseau en environnement associatif</li>
+        <li>Gestion du parc informatique et support utilisateurs</li>
+        <li>Mise en place et sécurisation de l'infrastructure réseau locale</li>
+      </ul>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-date">Décembre 2024</div>
+      <h3>Immersion en plateau technique</h3>
+      <div class="tl-place">AFPA Beaumont — Clermont-Ferrand</div>
+      <ul>
+        <li>Montage et démontage de PC — maintenance matérielle complète</li>
+        <li>Déploiement Windows Server avec Active Directory et dossiers partagés</li>
+        <li>Stratégies de sauvegarde avec Cobian Reflector et Windows Server</li>
+        <li>Configuration d'un mini réseau local, visite salle serveurs (baie de brassage)</li>
+      </ul>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-date">Juillet — Septembre 2023</div>
+      <h3>Stagiaire — Administration Réseau</h3>
+      <div class="tl-place">Digitech Soft and Partners Service — Bertoua, Cameroun</div>
+      <ul>
+        <li>Configuration et simulation de réseaux virtuels (Cisco Packet Tracer, CLI)</li>
+        <li>Installation de routeurs Mikrotik et résolution de problèmes de connectivité</li>
+        <li>Gestion et interconnexion de réseaux d'entreprise</li>
+      </ul>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-date">Juillet — Septembre 2021</div>
+      <h3>Stagiaire — Développement Web</h3>
+      <div class="tl-place">ASM Afrik — Bertoua, Cameroun</div>
+      <ul>
+        <li>Développement web : HTML, CSS, JavaScript, Bootstrap 5, WordPress</li>
+        <li>Installation et administration de serveurs locaux (XAMPP)</li>
+        <li>Modélisation UML (diagrammes de cas d'utilisation)</li>
+      </ul>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-date">Décembre 2024</div>
+      <h3>Bénévolat</h3>
+      <div class="tl-place">Secours Populaire — Clermont-Ferrand</div>
+      <ul>
+        <li>Collecte de jouets et denrées en supermarché pour enfants défavorisés</li>
+      </ul>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-date">Février 2025</div>
+      <h3>Intérim — Manutention</h3>
+      <div class="tl-place">Michelin — Clermont-Ferrand</div>
+      <ul>
+        <li>Poste de manutentionnaire en environnement industriel</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PARCOURS -->
+<section id="parcours" class="section">
+  <div class="s-header reveal">
+    <span class="s-num">03</span>
+    <h2 class="s-title">Formation</h2>
+    <div class="s-line"></div>
+  </div>
+  <div class="parcours-grid">
+    <div class="parcours-card reveal">
+      <div class="parcours-year">Depuis sept. 2025</div>
+      <h3>BTS SIO — Option SISR</h3>
+      <div class="parcours-org">Lycée Jacques Brel · Vénissieux</div>
+    </div>
+    <div class="parcours-card reveal">
+      <div class="parcours-year">Oct. 2022 — Août 2023</div>
+      <h3>1re Année BTS Réseaux & Sécurité</h3>
+      <div class="parcours-org">Institut Universitaire et Catholique · Bertoua, Cameroun</div>
+    </div>
+    <div class="parcours-card reveal">
+      <div class="parcours-year">Juin 2022</div>
+      <h3>Baccalauréat TI — Technologie de l'information</h3>
+      <div class="parcours-org">Lycée Scientifique · Bertoua, Cameroun</div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications" class="section">
+  <div class="s-header reveal">
+    <span class="s-num">04</span>
+    <h2 class="s-title">Certifications</h2>
+    <div class="s-line"></div>
+  </div>
+  <div class="certif-grid reveal">
+    <div class="certif-card">
+      <div class="certif-ok">✓ Juin 2026</div>
+      <h3>AWS Academy Graduate — Cloud Foundations</h3>
+      <div class="certif-by">Amazon Web Services (AWS)</div>
+    </div>
+    <div class="certif-card">
+      <div class="certif-ok">✓ Avril 2026</div>
+      <h3>Cisco Networking Academy Learn-A-Thon 2026</h3>
+      <div class="certif-by">Cisco Networking Academy</div>
+    </div>
+    <div class="certif-card">
+      <div class="certif-ok">✓ Février 2025</div>
+      <h3>Premiers pas avec Cisco Packet Tracer</h3>
+      <div class="certif-by">Cisco Networking Academy</div>
+    </div>
+    <div class="certif-card">
+      <div class="certif-ok">✓ Novembre 2025</div>
+      <h3>SecNumAcadémie — Attestation de suivi</h3>
+      <div class="certif-by">ANSSI — Agence nationale de la sécurité des SI</div>
+    </div>
+    <div class="certif-card">
+      <div class="certif-ok">✓ Août 2025</div>
+      <h3>Google Cybersecurity Professional Certificate V2</h3>
+      <div class="certif-by">Google · Coursera · SIEM, Python, +6 compétences</div>
+    </div>
+  </div>
+</section>
+
+<!-- SITUATIONS PROFESSIONNELLES -->
+<section id="situations" class="section">
+  <div class="s-header reveal">
+    <span class="s-num">05</span>
+    <h2 class="s-title">Situations Professionnelles</h2>
+    <div class="s-line"></div>
+  </div>
+  <div style="font-family:var(--mono);font-size:12px;color:var(--muted2);margin-bottom:2rem;padding:.75rem 1.25rem;border-left:3px solid var(--accent);background:var(--bg2)" class="reveal">
+    // 4 situations issues des stages et TP BTS — structurées selon le plan E5 du référentiel SIO
+  </div>
+
+  <!-- SP1 -->
+  <div class="sp-card reveal">
+    <div class="sp-header" onclick="toggleSP(this)">
+      <div class="sp-meta"><span class="sp-num">SP 01</span><span class="sp-tag">Réseau</span></div>
+      <h3 class="sp-title">Configuration d'un réseau virtuel d'entreprise</h3>
+      <div class="sp-place">Digitech Soft and Partners Service · Cameroun · 2023</div>
+      <span class="sp-toggle">▼</span>
+    </div>
+    <div class="sp-body">
+      <div class="sp-grid">
+        <div class="sp-block">
+          <div class="sp-block-title">// Contexte — Besoins — Objectifs</div>
+          <p>L'entreprise Digitech avait besoin de simuler et tester des architectures réseau pour ses clients avant déploiement réel. L'objectif était de configurer un réseau virtuel complet avec segmentation, routage et équipements réseau simulés, afin de valider la connectivité avant installation sur site.</p>
+        </div>
+        <div class="sp-block">
+          <div class="sp-block-title">// Environnement technologique</div>
+          <p>Cisco Packet Tracer, CLI (Command Line Interface), équipements réseau virtuels (routeurs, switches), machines virtuelles. Protocoles : IPv4, VLAN, routage statique, DHCP.</p>
+        </div>
+        <div class="sp-block">
+          <div class="sp-block-title">// Réalisation</div>
+          <ol>
+            <li>Analyse du cahier des charges réseau du client</li>
+            <li>Conception du plan d'adressage IP et de la segmentation VLAN</li>
+            <li>Configuration des routeurs et switches en CLI</li>
+            <li>Mise en place du routage inter-VLAN et des règles DHCP</li>
+            <li>Tests de connectivité et validation de bout en bout</li>
+            <li>Installation et configuration de routeurs Mikrotik pour un hôtel</li>
+          </ol>
+        </div>
+        <div class="sp-block">
+          <div class="sp-block-title">// Problèmes & Résolutions</div>
+          <p><strong>Problème :</strong> Conflits d'adresses IP entre VLANs lors de la configuration initiale.<br>
+          <strong>Résolution :</strong> Révision du plan d'adressage et reconfiguration des interfaces avec des plages d'adresses distinctes pour chaque segment.</p>
+        </div>
+        <div class="sp-block sp-block-full">
+          <div class="sp-block-title">// Bilan — Conclusion</div>
+          <p>Cette situation m'a permis de maîtriser la configuration réseau en conditions réelles d'entreprise. J'ai acquis de l'autonomie sur la CLI Cisco et compris l'importance d'une planification rigoureuse du plan d'adressage avant tout déploiement. Compétences validées : B2.4 (configuration infrastructure réseau).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SP2 -->
+  <div class="sp-card reveal">
+    <div class="sp-header" onclick="toggleSP(this)">
+      <div class="sp-meta"><span class="sp-num">SP 02</span><span class="sp-tag">Système</span></div>
+      <h3 class="sp-title">Déploiement d'un serveur Windows avec Active Directory</h3>
+      <div class="sp-place">AFPA Beaumont · Clermont-Ferrand · Décembre 2024</div>
+      <span class="sp-toggle">▼</span>
+    </div>
+    <div class="sp-body">
+      <div class="sp-grid">
+        <div class="sp-block">
+          <div class="sp-block-title">// Contexte — Besoins — Objectifs</div>
+          <p>Dans le cadre de l'immersion plateau technique à l'AFPA, il s'agissait de déployer une infrastructure serveur complète simulant un environnement d'entreprise réel avec gestion centralisée des utilisateurs et des ressources partagées.</p>
+        </div>
+        <div class="sp-block">
+          <div class="sp-block-title">// Environnement technologique</div>
+          <p>Windows Server 2019, Active Directory Domain Services (AD DS), DNS, DHCP intégré, dossiers partagés (SMB), Cobian Reflector, outils de maintenance matérielle.</p>
+        </div>
+        <div class="sp-block">
+          <div class="sp-block-title">// Réalisation</div>
+          <ol>
+            <li>Montage et vérification du matériel (PC serveur)</li>
+            <li>Installation de Windows Server et configuration initiale</li>
+            <li>Promotion du serveur en contrôleur de domaine (AD DS)</li>
+            <li>Création des unités d'organisation, utilisateurs et groupes</li>
+            <li>Configuration des dossiers partagés avec droits NTFS</li>
+            <li>Mise en place de la stratégie de sauvegarde (Cobian Reflector)</li>
+            <li>Configuration d'un mini réseau local et tests de connectivité</li>
+          </ol>
+        </div>
+        <div class="sp-block">
+          <div class="sp-block-title">// Problèmes & Résolutions</div>
+          <p><strong>Problème :</strong> Erreur lors de la promotion du contrôleur de domaine liée à la résolution DNS.<br>
+          <strong>Résolution :</strong> Configuration manuelle du serveur DNS primaire pointant vers lui-même (127.0.0.1) avant la promotion AD.</p>
+        </div>
+        <div class="sp-block sp-block-full">
+          <div class="sp-block-title">// Bilan — Conclusion</div>
+          <p>Cette situation a consolidé mes compétences en administration système Windows Server. La gestion d'un domaine Active Directory est une compétence fondamentale en SISR que j'ai pu pratiquer de bout en bout. Compétences validées : B2.3 (déploiement serveurs), B3.3 (sécurité des accès et identités).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SP3 -->
+  <div class="sp-card reveal">
+    <div class="sp-header" onclick="toggleSP(this)">
+      <div class="sp-meta"><span class="sp-num">SP 03</span><span class="sp-tag">Cybersécurité</span></div>
+      <h3 class="sp-title">Sécurisation d'un poste Windows et chiffrement des données</h3>
+      <div class="sp-place">BTS SIO SISR · Lycée Jacques Brel · 2025-2026</div>
+      <span class="sp-toggle">▼</span>
+    </div>
+    <div class="sp-body">
+      <div class="sp-grid">
+        <div class="sp-block">
+          <div class="sp-block-title">// Contexte — Besoins — Objectifs</div>
+          <p>Dans le cadre du BTS SIO, mettre en œuvre une politique de sécurité complète sur un poste Windows en entreprise : chiffrement des données sensibles, contrôle des périphériques USB, politique de mots de passe et chiffrement des communications email.</p>
+        </div>
+        <div class="sp-block">
+          <div class="sp-block-title">// Environnement technologique</div>
+          <p>Windows 10/11 Pro, BitLocker (chiffrement disque), AppLocker (contrôle des applications), GPO (Group Policy Objects), OpenPGP et S-MIME via Mozilla Thunderbird, VirusTotal.</p>
+        </div>
+        <div class="sp-block">
+          <div class="sp-block-title">// Réalisation</div>
+          <ol>
+            <li>Activation et configuration de BitLocker sur le disque système</li>
+            <li>Mise en place de règles AppLocker pour bloquer les exécutables non autorisés</li>
+            <li>Configuration GPO : contrôle des ports USB, politique de mots de passe</li>
+            <li>Génération de paires de clés OpenPGP et configuration S-MIME sur Thunderbird</li>
+            <li>Test de chiffrement et signature numérique des emails</li>
+            <li>Analyse de fichiers suspects via VirusTotal</li>
+            <li>Réalisation d'un PIA (analyse d'impact sur la vie privée)</li>
+          </ol>
+        </div>
+        <div class="sp-block">
+          <div class="sp-block-title">// Problèmes & Résolutions</div>
+          <p><strong>Problème :</strong> Conflit entre les règles AppLocker et certains logiciels métier autorisés.<br>
+          <strong>Résolution :</strong> Création d'exceptions ciblées dans AppLocker basées sur le hash du fichier exécutable plutôt que sur le chemin d'accès, plus sécurisé.</p>
+        </div>
+        <div class="sp-block sp-block-full">
+          <div class="sp-block-title">// Bilan — Conclusion</div>
+          <p>Cette situation m'a permis d'appréhender la sécurité en profondeur (defense in depth) : chiffrement au repos, contrôle des accès, sécurisation des communications. Ces compétences sont directement transférables en entreprise. Compétences validées : B3.1 (sécurité informatique), B3.2 (confidentialité des données).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SP4 -->
+  <div class="sp-card reveal">
+    <div class="sp-header" onclick="toggleSP(this)">
+      <div class="sp-meta"><span class="sp-num">SP 04</span><span class="sp-tag">Infrastructure</span></div>
+      <h3 class="sp-title">Mise en place d'une infrastructure de sauvegarde</h3>
+      <div class="sp-place">BTS SIO SISR · Lycée Jacques Brel · 2025-2026</div>
+      <span class="sp-toggle">▼</span>
+    </div>
+    <div class="sp-body">
+      <div class="sp-grid">
+        <div class="sp-block">
+          <div class="sp-block-title">// Contexte — Besoins — Objectifs</div>
+          <p>Mettre en place une stratégie de sauvegarde et de restauration complète pour un environnement Windows Server, garantissant la continuité d'activité en cas d'incident (panne matérielle, ransomware, erreur humaine).</p>
+        </div>
+        <div class="sp-block">
+          <div class="sp-block-title">// Environnement technologique</div>
+          <p>Windows Server 2019, Cobian Reflector (logiciel de sauvegarde), Windows Server Backup, stockage réseau NAS simulé, stratégie 3-2-1 (3 copies, 2 supports, 1 hors site).</p>
+        </div>
+        <div class="sp-block">
+          <div class="sp-block-title">// Réalisation</div>
+          <ol>
+            <li>Analyse des besoins et définition du plan de sauvegarde (RTO/RPO)</li>
+            <li>Installation et configuration de Cobian Reflector</li>
+            <li>Paramétrage des sauvegardes complètes, différentielles et incrémentielles</li>
+            <li>Planification des tâches de sauvegarde automatique</li>
+            <li>Configuration de Windows Server Backup pour l'état du système</li>
+            <li>Tests de restauration et validation de l'intégrité des données</li>
+            <li>Documentation de la procédure de restauration d'urgence</li>
+          </ol>
+        </div>
+        <div class="sp-block">
+          <div class="sp-block-title">// Problèmes & Résolutions</div>
+          <p><strong>Problème :</strong> Espace disque insuffisant pour les sauvegardes complètes quotidiennes.<br>
+          <strong>Résolution :</strong> Mise en place d'une rotation sauvegarde complète hebdomadaire + sauvegardes différentielles quotidiennes, réduisant l'espace de 70%.</p>
+        </div>
+        <div class="sp-block sp-block-full">
+          <div class="sp-block-title">// Bilan — Conclusion</div>
+          <p>La gestion de la sauvegarde est un pilier fondamental de la continuité d'activité. Cette situation m'a appris à calculer les besoins en stockage, à définir une politique réaliste (RTO/RPO) et à documenter les procédures. Compétences validées : B3.2 (disponibilité et intégrité des données), B2.3 (administration serveurs).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- INFRASTRUCTURE -->
+<section id="infra" class="section">
+  <div class="s-header reveal"><span class="s-num">06</span><h2 class="s-title">Infrastructure Réseau</h2><div class="s-line"></div></div>
+  <div class="infra-intro reveal"><p>Infrastructure cible de fin d'année : une <strong>ferme de serveurs segmentée en trois zones</strong> (DMZ, LAN, EXT) reliées par un pare-feu, et la <strong>salle C207</strong> où chaque groupe dispose de son IPFire, d'un routeur Cisco et d'une armoire de commutateurs. Un câble RJ45 relie les deux salles.</p>
+    <div class="chips"><span class="chip">🔥 Pare-feu</span><span class="chip">DMZ / LAN / EXT</span><span class="chip">HAProxy + Dolibarr GSB</span><span class="chip">Active Directory</span><span class="chip">Wazuh</span><span class="chip">TrueNAS</span><span class="chip">WDS / MDT</span><span class="chip">IPFire</span><span class="chip">VLAN Cisco</span></div>
+    <div class="prog"><span id="pgt"></span><div class="bar"><i id="pgb"></i></div></div></div>
+  <div class="zf reveal" id="rf"><button class="on" data-r="ferme">🏢 Ferme de serveurs</button><button data-r="c207">🖥️ Salle C207</button></div>
+  <div class="zf reveal" id="zf"><button class="on" data-z="all">Toutes zones</button><button data-z="int" style="--zc:var(--green)">LAN verte</button><button data-z="dmz" style="--zc:var(--accent2)">DMZ</button><button data-z="ext" style="--zc:#b0235f">EXT</button><span style="width:1rem"></span><button class="on" data-s="all">Tout état</button><button data-s="ok">✓ Réalisé</button><button data-s="wip">⟳ En cours</button><button data-s="plan">○ Prévu</button><button class="sim" id="sim">▶ Simuler un flux externe → Dolibarr</button></div>
+  <div class="schema reveal">
+    <svg id="sv" viewBox="0 0 940 570" role="img" aria-label="Schéma de l'infrastructure réseau"><g id="bg"></g><g id="nodes"></g><circle id="pk" class="pk" r="7" cx="0" cy="0"/></svg>
+    <div class="info" id="info">Clique sur un équipement du schéma ou sur une carte pour afficher son détail.</div>
+  </div>
+  <div class="notes" id="notes"></div>
+  <div class="srv-grid" id="srv-grid"></div>
+  <div class="keys reveal">
+    <div class="key"><div>🔥</div><h4>PARE-FEU</h4><p>Interconnecte DMZ, LAN et EXT</p></div>
+    <div class="key"><div>⚖️</div><h4>RÉPARTITION</h4><p>HAProxy devant 3 applications Dolibarr</p></div>
+    <div class="key"><div>📊</div><h4>SUPERVISION</h4><p>Supervision + Wazuh (SIEM)</p></div>
+    <div class="key"><div>🔀</div><h4>VLAN</h4><p>Routage inter-VLAN sur routeur Cisco</p></div>
+  </div>
+</section>
+
+<!-- VEILLE TECHNO -->
+<section id="veille" class="section">
+  <div class="s-header reveal">
+    <span class="s-num">07</span>
+    <h2 class="s-title">Veille Technologique</h2>
+    <div class="s-line"></div>
+  </div>
+  <div class="veille-problematique reveal">
+    <div class="veille-label">// Problématique</div>
+    <p>Dans quelle mesure les cyberattaques ciblant les infrastructures réseau d'entreprise représentent-elles une menace croissante, et quelles mesures défensives peuvent être mises en place ?</p>
+  </div>
+  <div class="articles-grid reveal">
+    <a class="article-card" href="https://cyber.gouv.fr/actualites/panorama-de-la-cybermenace-2025" target="_blank">
+      <span class="article-arrow">↗</span>
+      <div class="article-meta"><span class="article-source">ANSSI</span><span class="article-date">Mars 2026</span></div>
+      <h3>Panorama de la cybermenace 2025 — La France sous pression</h3>
+      <p>1 366 incidents recensés. Les équipements de bordure (pare-feu, VPN) massivement ciblés. Éducation (34%) et collectivités (24%) en première ligne face à des acteurs étatiques.</p>
+      <span class="article-tag">Infrastructure critique</span>
+    </a>
+    <a class="article-card" href="https://dfm.fr/articles/etat-lieux-cybersecurite-france-2025/" target="_blank">
+      <span class="article-arrow">↗</span>
+      <div class="article-meta"><span class="article-source">CESIN / DFM</span><span class="article-date">Juil. 2025</span></div>
+      <h3>47% des entreprises françaises attaquées — Bilan 2024</h3>
+      <p>60% des attaques débutent par du phishing. Les DDoS (41%) servent à saturer les passerelles pour masquer une intrusion simultanée sur le réseau interne.</p>
+      <span class="article-tag">Vecteurs d'attaque</span>
+    </a>
+    <a class="article-card" href="https://www.francenum.gouv.fr/magazine-du-numerique/les-entreprises-face-une-cybermenace-en-forte-acceleration-en-2025" target="_blank">
+      <span class="article-arrow">↗</span>
+      <div class="article-meta"><span class="article-source">Cybermalveillance.gouv</span><span class="article-date">Avril 2026</span></div>
+      <h3>+73% d'entreprises assistées — accélération inédite</h3>
+      <p>Plus de 500 000 victimes assistées en 2025. Les PME touchées dans 88% des brèches ransomware. Menace la plus impactante pour la continuité d'activité.</p>
+      <span class="article-tag">Ransomware · PME</span>
+    </a>
+    <a class="article-card" href="https://www.usine-digitale.fr/cybersecurite/les-cyberattaques-qui-ont-marque-lannee-2025-et-les-lecons-a-en-tirer.MLPTV4YZ2JGDDM4ERBAMBMYY6Q.html" target="_blank">
+      <span class="article-arrow">↗</span>
+      <div class="article-meta"><span class="article-source">Usine Digitale</span><span class="article-date">Janv. 2026</span></div>
+      <h3>NIS 2 et maîtrise opérationnelle : les leçons de 2025</h3>
+      <p>15 000 entités soumises à NIS 2. L'enjeu central est désormais opérationnel : supervision continue des accès, gestion des prestataires, détection des mouvements latéraux.</p>
+      <span class="article-tag">NIS 2 · Réponse à incident</span>
+    </a>
+  </div>
+  <div class="veille-conclusion reveal">
+    <h3>// Conclusion</h3>
+    <p>Les cyberattaques ciblant les infrastructures réseau progressent en volume et en sophistication. Les équipements de bordure (pare-feu, VPN, routeurs) restent le principal vecteur d'entrée. Les défenses les plus efficaces reposent sur trois piliers SISR : la <strong style="color:var(--text);font-weight:500">segmentation réseau</strong> (VLAN, DMZ), la <strong style="color:var(--text);font-weight:500">supervision continue</strong> (SIEM, Splunk) et la <strong style="color:var(--text);font-weight:500">gestion rigoureuse des accès</strong> (MFA, GPO, Active Directory).</p>
+  </div>
+</section>
+
+<!-- GRILLE E5 -->
+<section id="grille" class="section">
+  <div class="s-header reveal"><span class="s-num">08</span><h2 class="s-title">Grille des Compétences — Épreuve E5</h2><div class="s-line"></div></div>
+  <div class="grille-pdf-section reveal">
+    <div class="pdf-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0a7a52" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><path d="M9 12l6 6M15 12l-6 6"/></svg><div class="pdf-ext" style="color:#0a7a52">XLSX</div></div>
+    <div class="pdf-info"><h3>Tableau de synthèse des réalisations professionnelles</h3><p>Annexe 8-1 — BTS SIO, épreuve E5, session 2027. Visualisable directement ici, ou téléchargeable au format Excel.</p>
+      <div class="pdf-actions"><button class="pdf-btn primary" onclick="toggleXl(this)">⊞ Visualiser</button><button class="pdf-btn" onclick="dlXl()">↓ Télécharger (.xlsx)</button></div></div>
+  </div>
+  <div id="xl-wrap" class="xl-wrap"><table class="xl"><colgroup><col style="width:34%"><col style="width:10%"><col style="width:9.3%"><col style="width:9.3%"><col style="width:9.3%"><col style="width:9.3%"><col style="width:9.3%"><col style="width:9.3%"></colgroup><tr><th colspan="6" class="sec">BTS SERVICES INFORMATIQUES AUX ORGANISATIONS</th><th colspan="2">SESSION 2027</th></tr><tr><th colspan="8">Tableau de synthèse des réalisations professionnelles </th></tr><tr><td colspan="5">NOM et prénom : </td><td colspan="3">N° candidat : </td></tr><tr><td colspan="5">Centre de formation : Lycée Jacques-Brel</td><td>Option :</td><td>☒ SISR</td><td>☐ SLAM</td></tr><tr><td colspan="8">Adresse URL du portfolio : https://www.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</td></tr><tr><th rowspan="2"><div style="text-align:right">Compétences mises en œuvre</div><hr><div style="text-align:left">Réalisations professionnelles<br>(intitulé et liste des documents et productions associés)</div></th><th rowspan="2">Période : 01/09/202x au ??/06/2027)</th><th>Gérer le patrimoine informatique</th><th>Répondre aux incidents et aux demandes d’assistance et d’évolution</th><th>Développer la présence en ligne de l’organisation</th><th>Travailler en mode projet</th><th>Mettre à disposition des utilisateurs un service informatique</th><th>Organiser son développement professionnel</th></tr><tr><td class="bl">▸Recenser et identifier les ressources numériques <br>▸Exploiter des référentiels, normes et standards adoptés par le prestataire informatique<br>▸Mettre en place et vérifier les niveaux d’habilitation associés à un service<br>▸Vérifier les conditions de la continuité d’un service informatique<br>▸Gérer des sauvegardes<br>▸Vérifier le respect des règles d’utilisation des ressources numériques</td><td class="bl">▸Collecter, suivre et orienter des demandes <br>▸Traiter des demandes concernant les services réseau et système, applicatifs<br>▸Traiter des demandes concernant les applications</td><td class="bl">▸Participer à la valorisation de l’image de l’organisation sur les médias numériques en tenant compte du cadre juridique et des enjeux économiques<br>▸Référencer les services en ligne de l’organisation et mesurer leur visibilité.<br>▸Participer à l’évolution d’un site Web exploitant les données de l’organisation.</td><td class="bl">▸Analyser les objectifs et les modalités d’organisation d’un projet<br>▸Planifier les activités<br>▸Évaluer les indicateurs de suivi d’un projet et analyser les écarts</td><td class="bl">▸Réaliser les tests d’intégration et d’acceptation d’un service<br>▸Déployer un service<br>▸Accompagner les utilisateurs dans la mise en place d’un service</td><td class="bl">▸Mettre en place son environnement d’apprentissage personnel<br>▸Mettre en œuvre des outils et stratégies de veille informationnelle<br>▸Gérer son identité professionnelle<br>▸Développer son projet professionnel</td></tr><tr class="e"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr class="e"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr class="e"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr class="e"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr class="e"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr class="e"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr class="e"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr class="e"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr class="e"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr class="e"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td colspan="8" class="sec">Réalisations en milieu professionnel en cours de première année</td></tr><tr class="e"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr class="e"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr class="e"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr class="e"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr class="e"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr class="e"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr class="e"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td colspan="8" class="sec">Réalisations en milieu professionnel en cours de seconde année</td></tr><tr class="e"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr class="e"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr class="e"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr class="e"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr class="e"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr class="e"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr class="e"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></table></div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="s-header reveal">
+    <span class="s-num">09</span>
+    <h2 class="s-title">Contact</h2>
+    <div class="s-line"></div>
+  </div>
+  <div class="contact-wrap">
+    <div class="reveal">
+      <p class="contact-intro">Étudiant BTS SIO SISR avec un objectif clair : évoluer dans la <strong style="color:var(--text);font-weight:500">cybersécurité</strong>. Ouvert aux opportunités de stage, d'alternance ou de mise en réseau professionnel dans la protection des systèmes et infrastructures réseau.</p>
+    </div>
+    <div class="contact-links reveal">
+      <a class="clink" href="mailto:mouhamedhamed284@gmail.com">
+        <div class="clink-icon">@</div>
+        <div><div class="clink-label">Email</div><div class="clink-val">mouhamedhamed284@gmail.com</div></div>
+      </a>
+      <a class="clink" href="tel:0651174272">
+        <div class="clink-icon">#</div>
+        <div><div class="clink-label">Téléphone</div><div class="clink-val">06 51 17 42 72</div></div>
+      </a>
+      <a class="clink" href="https://www.linkedin.com/in/" target="_blank">
+        <div class="clink-icon">in</div>
+        <div><div class="clink-label">LinkedIn</div><div class="clink-val">@Hamed MOCTAR MOHAMED</div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 — Hamed MOCTAR MOHAMED</span>
+  <span class="footer-right">BTS SIO · SISR · Lycée Jacques Brel · Vénissieux</span>
+</footer>
+
+<!-- CHATBOT : icône shield cybersécurité -->
+<button id="chat-toggle" aria-label="Assistant portfolio">
+  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- cadre terminal -->
+    <rect x="2" y="3" width="20" height="16" rx="2" stroke="#ffffff" stroke-width="1.6"/>
+    <!-- barre titre -->
+    <line x1="2" y1="7" x2="22" y2="7" stroke="#ffffff" stroke-width="1.2" opacity="0.4"/>
+    <!-- prompt > -->
+    <polyline points="5,11.5 8.5,13.5 5,15.5" stroke="#10e89a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- curseur _ -->
+    <line x1="10" y1="15.5" x2="14" y2="15.5" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round"/>
+  </svg>
+</button>
+
+<div id="chat-box">
+  <div class="chat-head">
+    <span class="chat-title"><span class="chat-dot"></span>Assistant Portfolio</span>
+    <button id="chat-close">✕</button>
+  </div>
+  <div id="chat-msgs">
+    <div class="msg bot">Bonjour ! Je suis l'assistant de Hamed. Posez-moi une question sur son profil, ses compétences ou son parcours 👾</div>
+  </div>
+  <div class="chat-sugs">
+    <button class="sug" onclick="sendSug(this)">Compétences réseau</button>
+    <button class="sug" onclick="sendSug(this)">Certifications</button>
+    <button class="sug" onclick="sendSug(this)">Objectif cyber</button>
+    <button class="sug" onclick="sendSug(this)">Ses stages</button>
+    <button class="sug" onclick="sendSug(this)">Formation</button>
+  </div>
+  <div class="chat-input-row">
+    <input id="chat-input" type="text" placeholder="Votre question..." autocomplete="off">
+    <button id="chat-send">Envoyer</button>
+  </div>
+</div>
+
+<script>
+/* ── NEURAL NETWORK BG ── */
+(function(){
+  const c=document.getElementById('particles-canvas');
+  const ctx=c.getContext('2d');
+  let W,H,mouse={x:-999,y:-999},nodes=[],packets=[],frame=0;
+  const COLORS=['rgba(18,81,163,','rgba(10,122,82,','rgba(91,33,182,','rgba(180,100,10,'];
+  const MAX_DIST=160,N_BASE=80;
+
+  function resize(){
+    W=c.width=window.innerWidth;
+    H=c.height=window.innerHeight;
+    initNodes();
+  }
+
+  function initNodes(){
+    nodes=[];
+    const n=Math.max(N_BASE,Math.floor(W*H/10000));
+    for(let i=0;i<n;i++){
+      nodes.push({
+        x:Math.random()*W, y:Math.random()*H,
+        vx:(Math.random()-.5)*.4, vy:(Math.random()-.5)*.4,
+        r:Math.random()*2+1,
+        color:COLORS[Math.floor(Math.random()*COLORS.length)],
+        pulse:Math.random()*Math.PI*2,
+        pulseSpeed:0.02+Math.random()*0.03
+      });
+    }
+  }
+
+  function spawnPacket(from,to){
+    packets.push({from,to,progress:0,speed:0.012+Math.random()*0.018,color:COLORS[Math.floor(Math.random()*COLORS.length)]});
+  }
+
+  document.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY});
+  document.addEventListener('mouseleave',()=>{mouse.x=-999;mouse.y=-999});
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    frame++;
+
+    /* update nodes */
+    nodes.forEach(p=>{
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0)p.x=W; if(p.x>W)p.x=0;
+      if(p.y<0)p.y=H; if(p.y>H)p.y=0;
+      p.pulse+=p.pulseSpeed;
+
+      /* mouse repulsion */
+      const mdx=p.x-mouse.x, mdy=p.y-mouse.y;
+      const md=Math.sqrt(mdx*mdx+mdy*mdy);
+      if(md<120){const force=(120-md)/120*0.6;p.vx+=mdx/md*force;p.vy+=mdy/md*force;}
+      p.vx*=0.995; p.vy*=0.995;
+    });
+
+    /* draw edges */
+    for(let i=0;i<nodes.length;i++){
+      const a=nodes[i];
+      for(let j=i+1;j<nodes.length;j++){
+        const b=nodes[j];
+        const dx=a.x-b.x, dy=a.y-b.y;
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<MAX_DIST){
+          const alpha=(1-d/MAX_DIST)*0.22;
+          /* mouse proximity boost */
+          const mda=Math.hypot(a.x-mouse.x,a.y-mouse.y);
+          const boost=mda<200?0.5*(1-mda/200):0;
+          ctx.beginPath();
+          ctx.moveTo(a.x,a.y);
+          ctx.lineTo(b.x,b.y);
+          ctx.strokeStyle=`rgba(18,81,163,${Math.min(alpha+boost,0.5)})`;
+          ctx.lineWidth=0.6+(boost*1.5);
+          ctx.stroke();
+          /* random packet spawn */
+          if(frame%90===0 && Math.random()<0.08) spawnPacket(i,j);
+        }
+      }
+    }
+
+    /* draw packets (data traveling edges) */
+    packets=packets.filter(pk=>{
+      pk.progress+=pk.speed;
+      if(pk.progress>=1) return false;
+      const a=nodes[pk.from], b=nodes[pk.to];
+      const x=a.x+(b.x-a.x)*pk.progress;
+      const y=a.y+(b.y-a.y)*pk.progress;
+      ctx.beginPath();
+      ctx.arc(x,y,2.5,0,Math.PI*2);
+      ctx.fillStyle=pk.color+'0.9)';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(x,y,5,0,Math.PI*2);
+      ctx.fillStyle=pk.color+'0.2)';
+      ctx.fill();
+      return true;
+    });
+
+    /* draw nodes */
+    nodes.forEach(p=>{
+      const pulse=Math.sin(p.pulse)*0.5+0.5;
+      const r=p.r*(1+pulse*0.5);
+      /* glow */
+      const grd=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,r*4);
+      grd.addColorStop(0,p.color+'0.8)');
+      grd.addColorStop(1,p.color+'0)');
+      ctx.beginPath();ctx.arc(p.x,p.y,r*4,0,Math.PI*2);
+      ctx.fillStyle=grd;ctx.fill();
+      /* core */
+      ctx.beginPath();ctx.arc(p.x,p.y,r,0,Math.PI*2);
+      ctx.fillStyle=p.color+(0.6+pulse*0.4)+')';
+      ctx.fill();
+      /* mouse highlight */
+      const md=Math.hypot(p.x-mouse.x,p.y-mouse.y);
+      if(md<150){
+        ctx.beginPath();ctx.arc(p.x,p.y,r*3*(1-md/150),0,Math.PI*2);
+        ctx.fillStyle=p.color+'0.3)';ctx.fill();
+      }
+    });
+
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',resize);
+  resize();draw();
+})();
+
+/* ── TERMINAL TYPEWRITER ── */
+(function(){
+  const lines=[
+    {type:'cmd',text:'cat profil.txt'},
+    {type:'out g',text:'Nom: Hamed MOCTAR MOHAMED'},
+    {type:'out',text:'Formation: BTS SIO SISR'},
+    {type:'out',text:'Lycée: Jacques Brel, Vénissieux'},
+    {type:'out',text:'Objectif: <span style="color:var(--accent)">Cybersécurité</span>'},
+    {type:'blank'},
+    {type:'cmd',text:'cat certifs.txt'},
+    {type:'out y',text:'✓ SecNumAcadémie (ANSSI)'},
+    {type:'out y',text:'✓ Google Cybersecurity Pro V2'},
+    {type:'blank'},
+    {type:'cmd',text:'nmap -sV skills.local'},
+    {type:'out',text:'22/tcp  open  Windows Server / AD'},
+    {type:'out',text:'80/tcp  open  Apache · IPFire'},
+    {type:'out',text:'443/tcp open  Wireshark · Splunk'},
+    {type:'blank'},
+    {type:'cmd',text:'ping -c 1 cybersec.target'},
+    {type:'out g',text:'PONG — connexion établie ✓'},
+    {type:'cursor'}
+  ];
+  const body=document.getElementById('terminal-body');
+  let i=0;
+  function next(){
+    if(i>=lines.length)return;
+    const l=lines[i++];
+    const d=document.createElement('div');
+    if(l.type==='blank'){d.style.height='.4rem'}
+    else if(l.type==='cursor'){d.className='term-line';d.innerHTML='<span class="term-dollar">$</span><span class="term-cursor"></span>'}
+    else if(l.type.startsWith('cmd')){d.className='term-line';d.innerHTML=`<span class="term-dollar">$</span><span class="term-cmd"></span>`;body.appendChild(d);const sp=d.querySelector('.term-cmd');typeText(sp,l.text,()=>setTimeout(next,180));return}
+    else{d.className='term-out '+l.type.replace('out','').trim();d.innerHTML=l.text}
+    body.appendChild(d);
+    body.scrollTop=body.scrollHeight;
+    setTimeout(next,l.type==='blank'?50:80);
+  }
+  function typeText(el,txt,cb){let j=0;const iv=setInterval(()=>{el.textContent+=txt[j++];if(j>=txt.length){clearInterval(iv);cb&&cb()}},28)}
+  setTimeout(next,800);
+})();
+
+/* ── COUNTER ANIMATION ── */
+(function(){
+  const nums=document.querySelectorAll('.stat-num[data-target]');
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting)return;
+      const el=e.target;const target=+el.dataset.target;let cur=0;
+      const step=Math.ceil(target/20);
+      const iv=setInterval(()=>{cur+=step;if(cur>=target){el.textContent=target;clearInterval(iv)}else el.textContent=cur;},60);
+      obs.unobserve(el);
+    });
+  },{threshold:.5});
+  nums.forEach(n=>obs.observe(n));
+})();
+
+/* ── REVEAL ── */
+const reveals=document.querySelectorAll('.reveal,.reveal-left');
+const revObs=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*60);revObs.unobserve(e.target)}});
+},{threshold:.08});
+reveals.forEach(el=>revObs.observe(el));
+
+/* ── ACTIVE NAV ── */
+const sections=document.querySelectorAll('[id]');
+const navLinks=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-100)cur=s.id});
+  navLinks.forEach(a=>{a.style.color=a.getAttribute('href')==='#'+cur?'var(--accent)':'';});
+});
+
+/* ── PDF TOGGLE ── */
+function togglePdf(){
+  const fr=document.getElementById('pdf-frame');
+  const btn=event.target;
+  if(fr.classList.contains('open')){fr.classList.remove('open');btn.textContent='⊞ Visualiser'}
+  else{fr.classList.add('open');btn.textContent='✕ Fermer';fr.scrollIntoView({behavior:'smooth',block:'center'})}
+}
+
+
+/* ── SITUATIONS PRO TOGGLE ── */
+function toggleSP(header){
+  const body=header.nextElementSibling;
+  const isOpen=body.classList.contains('open');
+  document.querySelectorAll('.sp-body.open').forEach(b=>{b.classList.remove('open');b.previousElementSibling.classList.remove('open')});
+  if(!isOpen){body.classList.add('open');header.classList.add('open')}
+}
+
+/* ── CHATBOT ── */
+const toggle=document.getElementById('chat-toggle');
+const box=document.getElementById('chat-box');
+const closeBtn=document.getElementById('chat-close');
+const msgs=document.getElementById('chat-msgs');
+const input=document.getElementById('chat-input');
+const sendBtn=document.getElementById('chat-send');
+
+toggle.onclick=()=>{
+  box.classList.toggle('open');
+  if(box.classList.contains('open')){setTimeout(()=>input.focus(),300)}
+};
+closeBtn.onclick=()=>box.classList.remove('open');
+
+function addMsg(txt,who){
+  const d=document.createElement('div');
+  d.className='msg '+who;
+  d.innerHTML=txt;
+  msgs.appendChild(d);
+  msgs.scrollTop=msgs.scrollHeight;
+  return d;
+}
+function sendSug(btn){input.value=btn.textContent;handleSend()}
+function getReply(q){
+  q=q.toLowerCase().trim();
+  if(/infra|firewall|pare-feu|dmz|topolog|wazuh|centreon|haproxy|nextcloud|truenas/.test(q))
+    return'Hamed travaille sur une infrastructure segmentée en trois zones (DMZ, LAN verte, EXT) reliées par un pare-feu : HAProxy et applications Dolibarr en DMZ, AD, Wazuh, TrueNAS, WDS/MDT dans le LAN, plus la salle C207 avec IPFire et routeur Cisco. Le schéma interactif est dans la section Infrastructure.';
+  if(/réseau|reseau|vlan|dhcp|dns|cisco|wireshark|ipfire/.test(q))
+    return'Hamed maîtrise la segmentation réseau (VLAN, DMZ, WAN) via IPFire, l\'adressage IPv4/IPv6, DHCP/DNS, le routage inter-VLAN, Cisco Packet Tracer, Wireshark et TCPdump.';
+  if(/certif/.test(q))
+    return'Hamed possède la <strong>SecNumAcadémie</strong> (ANSSI) et le <strong>Google Cybersecurity Professional Certificate V2</strong> — deux certifications directement liées à la cybersécurité.';
+  if(/objectif|but|ambition|cyber/.test(q))
+    return'L\'objectif de Hamed est d\'évoluer dans la <strong>cybersécurité</strong> — protection des infrastructures réseau, détection d\'intrusions, sécurisation des SI.';
+  if(/stage|expérience|experience|digitech|asm/.test(q))
+    return'Hamed a effectué deux stages au Cameroun : <strong>Digitech</strong> (réseau, Mikrotik, Cisco) et <strong>ASM Afrik</strong> (dev web). Il a aussi réalisé une immersion à l\'AFPA (Windows Server, AD, réseau local).';
+  if(/formation|diplôme|diplome|bts|lycée/.test(q))
+    return'BTS SIO option SISR au <strong>Lycée Jacques Brel (Vénissieux)</strong>. Précédemment : 1re année BTS Réseaux & Sécurité au Cameroun + Bac TI.';
+  if(/système|serveur|windows|linux|proxmox|vmware/.test(q))
+    return'Hamed administre Windows Server (AD, GPO, BitLocker, AppLocker), Ubuntu Server, Debian. Virtualisation avancée sous <strong>Proxmox et VMware</strong>.';
+  if(/veille|ransomware|ddos|attaque|anssi/.test(q))
+    return'Sa veille porte sur les cyberattaques ciblant les infrastructures réseau. Sources : ANSSI, CESIN, Cybermalveillance.gouv.fr. En 2025 : 1 366 incidents ANSSI, +73% d\'entreprises victimes.';
+  if(/langue|anglais|arabe/.test(q))
+    return'Hamed parle <strong>français</strong> (natif), <strong>arabe</strong> (B2) et <strong>anglais</strong> (A2).';
+  if(/contact|email|téléphone|linkedin/.test(q))
+    return'Email : <strong>mouhamedhamed284@gmail.com</strong><br>Tél : 06 51 17 42 72<br>LinkedIn : @Hamed MOCTAR MOHAMED';
+  if(/lyon|francheville|localisation|où/.test(q))
+    return'Hamed est basé à <strong>Francheville (69340)</strong>, dans la métropole de Lyon.';
+  if(/grille|e5|compétence/.test(q))
+    return'La grille E5 est disponible au format Excel (.xlsx) dans la section "Grille des compétences" — vous pouvez la visualiser directement ou la télécharger.';
+  if(/bonjour|salut|hello|bonsoir|hi/.test(q))
+    return'Bonjour ! Comment puis-je vous aider concernant le profil de Hamed ?';
+  if(/merci/.test(q))
+    return'Avec plaisir ! N\'hésitez pas si vous avez d\'autres questions sur le profil de Hamed.';
+  return'Je n\'ai pas d\'information précise sur ce sujet. Pour toute question spécifique, contactez Hamed directement à <strong>mouhamedhamed284@gmail.com</strong>.';
+}
+async function handleSend(){
+  const val=input.value.trim();if(!val)return;
+  addMsg(val,'user');input.value='';
+  const t=addMsg('<span class="dots"></span>','bot typing');
+  await new Promise(r=>setTimeout(r,700));
+  t.innerHTML=getReply(val);t.classList.remove('typing');
+}
+sendBtn.onclick=handleSend;
+input.addEventListener('keydown',e=>{if(e.key==='Enter')handleSend()});
+
+/* ── INFRA ── */
+const Z={int:{n:"LAN VERTE",c:"var(--green)"},dmz:{n:"DMZ",c:"var(--accent2)"},ext:{n:"EXT",c:"#b0235f"},fw:{n:"PARE-FEU",c:"var(--accent2)"}};
+const ST={ok:"✓ Réalisé",wip:"⟳ En cours",plan:"○ Prévu"};
+/* st : "ok" (réalisé) | "wip" (en cours) | "plan" (prévu) — à modifier au fil de l'année */
+const D=[
+["hap","ferme","HAPROXY","Serveur HAProxy","10.0.205.6","dmz",230,46,"⚖️","Répartiteur de charge placé devant les trois applications Dolibarr GSB.",["HAProxy","Load balancing"],"plan"],
+["vmt","ferme","VM W11 TEST","VM Windows 11 de test","DMZ","dmz",420,46,"💻","Machine virtuelle Windows 11 de test, dans la DMZ.",["Windows 11","Test"],"plan"],
+["g1","ferme","DOLIBARR GSB 1","App Dolibarr GSB 1","10.0.205.3","dmz",36,140,"🗂️","Première instance de l'application Dolibarr, répartie par HAProxy.",["Dolibarr","Apache"],"plan"],
+["g2","ferme","DOLIBARR GSB 2","App Dolibarr GSB 2","10.0.205.4","dmz",142,140,"🗂️","Deuxième instance de l'application Dolibarr.",["Dolibarr","Apache"],"plan"],
+["g3","ferme","DOLIBARR GSB 3","App Dolibarr GSB 3","10.0.205.5","dmz",248,140,"🗂️","Troisième instance de l'application Dolibarr.",["Dolibarr","Apache"],"plan"],
+["nxc","ferme","NEXTCLOUD","Serveur Nextcloud","10.0.205.2","dmz",354,140,"☁️","Serveur Nextcloud : partage de fichiers et collaboration.",["Nextcloud"],"plan"],
+["swd","ferme","SWITCH DMZ","Commutateur DMZ","DMZ","dmz",470,140,"🔀","Commutateur du segment DMZ, relié au pare-feu.",["Switch"],"plan"],
+["ad","ferme","SERVEUR AD","Serveur AD","10.0.205.66","int",40,278,"🏢","Active Directory : annuaire et authentification du domaine.",["Windows Server","AD DS","GPO"],"plan"],
+["dhcp","ferme","DHCP SECOND.","Serveur DHCP secondaire","10.0.205.76","int",40,342,"📡","Serveur DHCP secondaire pour la redondance.",["DHCP","Redondance"],"plan"],
+["fic","ferme","FICHIERS + URBACKUP","Serveur de fichiers + URBackup","10.0.205.67","int",40,406,"📁","Partage de fichiers et sauvegardes avec URBackup.",["SMB","URBackup"],"plan"],
+["nas","ferme","TRUENAS","Serveur TrueNAS","10.0.205.68","int",40,470,"💾","NAS TrueNAS : stockage et sauvegardes.",["TrueNAS","ZFS"],"plan"],
+["waz","ferme","WAZUH","Serveur Wazuh","10.0.205.72","int",170,278,"🛡️","SIEM Wazuh : détection d'intrusions et centralisation des logs.",["SIEM","IDS"],"plan"],
+["sup","ferme","SUPERVISION","Serveur de supervision","10.0.205.69","int",170,342,"📊","Supervision des services et des serveurs.",["Supervision","SNMP"],"plan"],
+["wds","ferme","WDS MDT","Serveur WDS MDT","10.0.205.75","int",170,406,"🖥️","Déploiement automatisé des postes (WDS / MDT).",["WDS","MDT"],"plan"],
+["bdd","ferme","BDD DOLIBARR","Serveur BDD Dolibarr","10.0.205.73","int",300,278,"🗄️","Base de données des applications Dolibarr.",["SQL","Dolibarr"],"plan"],
+["tel","ferme","TÉLÉPHONIE","Serveur de téléphonie","10.0.205.71","int",300,342,"☎️","Serveur de téléphonie (VoIP).",["VoIP"],"plan"],
+["vml","ferme","VM W11 TEST","VM Windows 11 de test","LAN","int",450,278,"💻","Machine virtuelle Windows 11 de test, dans le LAN.",["Windows 11","Test"],"plan"],
+["vmd","ferme","VM DEBIAN 12","VM Debian 12","LAN","int",450,342,"🐧","Machine virtuelle Debian 12, dans le LAN.",["Debian 12"],"plan"],
+["swl","ferme","SWITCH LAN","Commutateur LAN","LAN","int",450,470,"🔀","Commutateur du segment LAN, relié au pare-feu.",["Switch"],"plan"],
+["fw","ferme","FIREWALL","Pare-feu","10.0.xxx.0/26 · .65/26 · 172.28.xxx.253","fw",620,360,"🔥","Interconnecte la DMZ (10.0.xxx.0/26), le LAN (10.0.xxx.65/26) et la zone EXT (172.28.xxx.253).",["Filtrage","Segmentation"],"plan",100,80],
+["vmx","ferme","VM DEBIAN 12","VM Debian 12 (EXT)","EXT","ext",802,330,"🐧","Machine virtuelle Debian 12 en zone externe.",["Debian 12","Client"],"plan"],
+["vmw","ferme","VM W11 TEST","VM Windows 11 (EXT)","EXT","ext",802,410,"💻","Machine virtuelle Windows 11 de test en zone externe.",["Windows 11","Client"],"plan"],
+["sdl","c207","SWITCH D-LINK","Switch D-Link salle C207","172.28.7.x","ext",40,60,"🔀","Switch D-Link de la salle C207.",["D-Link"],"plan"],
+["pc1","c207","PC DE TRAVAIL","PC de travail","172.28.7.x","ext",40,125,"🖥️","PC sur lequel l'étudiant travaille.",["PC"],"plan"],
+["ipf","c207","IPFIRE","IPFire du groupe","172.28.7.GRX / 192.168.X.GRX","ext",300,60,"🔥","Machine physique du groupe, reliée à un sous-répartiteur.",["IPFire","Pare-feu"],"plan",130,70],
+["r1","c207","ROUTEUR CISCO R1","Routeur Cisco R1","192.168.1.254/24","int",400,250,"📶","Routage inter-VLAN par sous-interfaces (G0/0) et lien vers l'armoire (G0/1).",["Cisco","Inter-VLAN"],"plan",130,60],
+["sw1","c207","SWITCH SW1","Switch d'armoire SW1","Trunk multi-VLAN","int",250,350,"🔀","Switch d'armoire en trunk multi-VLAN : 4 étudiants par switch.",["Switch","VLAN"],"plan",120],
+["sw2","c207","SWITCH SW2","Switch d'armoire SW2","Trunk multi-VLAN","int",530,350,"🔀","Second switch d'armoire en trunk multi-VLAN.",["Switch","VLAN"],"plan",120],
+["wifi","c207","WIFI","Point d'accès WiFi","Adressage auto","int",40,330,"📡","Point d'accès WiFi (adressage automatique).",["WiFi"],"plan"],
+["tph","c207","IP PHONE","Téléphone IP","LAN","int",40,410,"📞","Téléphone IP raccordé à l'armoire.",["VoIP"],"plan"],
+["pc2","c207","PC DE TRAVAIL","PC de travail (LAN)","192.168.X.GRX","int",250,450,"🖥️","PC sur lequel l'étudiant travaille.",["PC"],"plan"],
+["vm2","c207","VM DU PC","VM sur le PC","192.168.X.GRX","int",400,450,"💻","Machine virtuelle hébergée sur le PC de travail.",["VM"],"plan"]
+];
+const N=D.map(a=>({id:a[0],r:a[1],l:a[2],f:a[3],ip:a[4],z:a[5],x:a[6],y:a[7],ic:a[8],d:a[9],t:a[10],s:a[11],w:a[12]||96,h:a[13]||56}));
+const zb=(z,x,y,w,h,t)=>`<g class="zg" data-z="${z}"><rect class="zone z-${z}" x="${x}" y="${y}" width="${w}" height="${h}" rx="10"/><text class="zl z-${z}" x="${x+14}" y="${y+18}">◈ ${t}</text></g>`;
+const ln=(d,col,w)=>`<path class="lnk" style="stroke:${col};stroke-width:${w||2.2}" d="${d}"/>`;
+const tx=(x,y,t,a)=>`<text class="zl" x="${x}" y="${y}" text-anchor="${a||"middle"}" style="fill:var(--muted2);font-size:9px">${t}</text>`;
+const ROOM={
+ferme:zb("dmz",20,20,560,200,"DMZ — ORANGE · 10.0.xxx.0/26")+zb("int",20,250,560,300,"LAN — VERTE · 10.0.xxx.64/26")+zb("ext",780,250,140,300,"EXT — ROUGE")+tx(850,280,"172.28.xxx.0/24")+
+ ln("M278 102L84 140","var(--accent2)",1.8)+ln("M278 102L190 140","var(--accent2)",1.8)+ln("M278 102L296 140","var(--accent2)",1.8)+
+ ln("M566 168H670V360","var(--accent2)")+ln("M546 498H670V440","var(--green)")+ln("M720 400H780","#b0235f")+
+ tx(676,352,"10.0.xxx.0/26","start")+tx(676,456,"10.0.xxx.65/26","start")+tx(750,392,"172.28.xxx.253")+tx(60,240,"Tous les équipements du segment sont reliés au switch de la zone","start"),
+c207:zb("ext",20,20,440,175,"EXT — ROUGE · 172.28.7.0/24")+zb("int",20,225,900,325,"LAN — VERT · 192.168.X.GRX")+
+ ln("M136 88H300","#b0235f")+ln("M88 116V125","#b0235f",1.8)+ln("M365 130V210H465V250","var(--green)")+ln("M430 310V330H310V350","var(--green)",1.8)+ln("M500 310V330H590V350","var(--green)",1.8)+
+ ln("M136 358H250","var(--green)",1.8)+ln("M136 438H220V380H250","var(--green)",1.8)+ln("M310 450V406","var(--green)",1.8)+ln("M346 478H400","var(--green)",1.8)+ln("M370 378H530","var(--accent)",3)+
+ tx(218,80,"172.28.7.GRX")+tx(450,370,"Trunk multi-VLAN")+tx(480,210,"192.168.X.GRX","start")};
+const NOTES={ferme:[],c207:[
+["#c0392b","<b>Plateforme armoire</b><br>Armoire 1 : X=1 · Armoire 2 : X=2 · Armoire 3 : X=3<br>1 armoire = 4 personnes."],
+["#c9a800","<b>Routeur Cisco</b> — G0/0 : routage inter-VLAN par sous-interfaces (Default, RH, COMPTA…)<br>0/0.1 : 10.0.1.254/24 · 0/0.2 : 10.0.2.254/24 · 0/0.3 : 10.0.3.254/24 · WiFi : auto<br>G0/1 : lien panoplie armoire (ex. 192.168.1.254/24)."],
+["#0a7a52","<b>Répartition des étudiants (SW1 / SW2)</b><br>Étudiant 1 : ports 1 à 6 · Étudiant 2 : ports 7 à 12<br>Étudiant 3 : ports 13 à 18 · Étudiant 4 : ports 19 à 24."]]};
+const $=s=>document.querySelector(s),info=$("#info");let room="ferme",fz="all",fs="all",busy=false;
+function draw(){const L=N.filter(n=>n.r===room);$("#bg").innerHTML=ROOM[room];
+$("#nodes").innerHTML=L.map(n=>{const cx=n.x+n.w/2,fw=n.id==="fw";return `<g class="nd z-${n.z} ${n.s}" data-id="${n.id}" data-z="${n.z}" data-s="${n.s}" tabindex="0"><rect x="${n.x}" y="${n.y}" width="${n.w}" height="${n.h}" rx="8"/><circle class="st-dot st-${n.s}" cx="${n.x+n.w-9}" cy="${n.y+9}" r="4.5"/><text x="${cx}" y="${n.y+n.h/2-(fw?4:6)}" text-anchor="middle" font-size="${fw?24:17}">${n.ic}</text><text class="n" x="${cx}" y="${n.y+n.h-17}" text-anchor="middle">${n.l.length>16?n.l.slice(0,16):n.l}</text><text class="ip" x="${cx}" y="${n.y+n.h-6}" text-anchor="middle">${fw?"pare-feu":(n.ip.length>18?"":n.ip)}</text></g>`}).join("");
+$("#srv-grid").innerHTML=L.map(n=>`<div class="srv z-${n.z}" data-id="${n.id}" data-z="${n.z}" data-s="${n.s}"><h4>${n.ic} ${n.f}</h4><div class="ip">${n.ip}</div><span class="zt">◈ ${Z[n.z].n}</span><span class="stt">${ST[n.s]}</span><p>${n.d}</p><div class="tags">${n.t.map(t=>`<span class="tag">${t}</span>`).join("")}</div></div>`).join("");
+const nt=$("#notes");nt.className="notes"+(NOTES[room].length?" on":"");nt.innerHTML=NOTES[room].map(a=>`<div class="note" style="--c:${a[0]}">${a[1]}</div>`).join("");
+$("#sim").style.display=room==="ferme"?"":"none";
+const ok=L.filter(n=>n.s==="ok").length;$("#pgt").textContent=`Avancement (${room==="ferme"?"ferme de serveurs":"salle C207"}) : ${ok} / ${L.length} équipements réalisés · ${L.filter(n=>n.s==="wip").length} en cours`;$("#pgb").style.width=(ok/L.length*100)+"%";
+document.querySelectorAll(".nd,.srv").forEach(e=>{e.onclick=()=>sel(e.dataset.id);e.onkeydown=ev=>{if(ev.key==="Enter")sel(e.dataset.id)}});apply()}
+function apply(){const m=e=>(fz==="all"||e.dataset.z===fz||e.dataset.z==="fw")&&(fs==="all"||e.dataset.s===fs);
+document.querySelectorAll(".nd").forEach(e=>e.classList.toggle("nomatch",!m(e)));document.querySelectorAll(".srv").forEach(e=>e.classList.toggle("hid",!m(e)));document.querySelectorAll(".zg").forEach(e=>e.classList.toggle("dim",fz!=="all"&&e.dataset.z!==fz))}
+function sel(id){document.querySelectorAll(".sel").forEach(e=>e.classList.remove("sel"));document.querySelectorAll(`[data-id="${id}"]`).forEach(e=>e.classList.add("sel"));const n=N.find(x=>x.id===id);info.innerHTML=`<b>${n.f}</b> · ${n.ip} · <span style="color:${Z[n.z].c}">${Z[n.z].n}</span> · ${ST[n.s]}<br>${n.d}`}
+document.querySelectorAll("#rf button").forEach(b=>b.onclick=()=>{document.querySelectorAll("#rf button").forEach(x=>x.classList.toggle("on",x===b));room=b.dataset.r;info.textContent="Clique sur un équipement du schéma ou sur une carte pour afficher son détail.";draw()});
+document.querySelectorAll("#zf button[data-z]").forEach(b=>b.onclick=()=>{document.querySelectorAll("#zf button[data-z]").forEach(x=>x.classList.toggle("on",x===b));fz=b.dataset.z;apply()});
+document.querySelectorAll("#zf button[data-s]").forEach(b=>b.onclick=()=>{document.querySelectorAll("#zf button[data-s]").forEach(x=>x.classList.toggle("on",x===b));fs=b.dataset.s;apply()});
+const ctr=id=>{const n=N.find(x=>x.id===id);return[n.x+n.w/2,n.y+n.h/2]};
+$("#sim").onclick=async()=>{if(busy)return;busy=true;const pk=$("#pk"),steps=[["vmx","Client externe (VM Debian 12, zone EXT) : émet une requête vers l'application."],["fw","→ Pare-feu : filtrage et contrôle des flux entre les zones."],["hap","→ HAProxy (DMZ) : la requête est répartie entre les instances Dolibarr."],["g1","→ Dolibarr GSB 1 : requête servie depuis la DMZ, sans jamais atteindre le LAN."]];let prev=ctr("vmx");pk.setAttribute("cx",prev[0]);pk.setAttribute("cy",prev[1]);pk.style.opacity=1;for(const[id,txt]of steps){const to=ctr(id),t0=performance.now();await new Promise(r=>{(function f(t){const k=Math.min((t-t0)/1000,1);pk.setAttribute("cx",prev[0]+(to[0]-prev[0])*k);pk.setAttribute("cy",prev[1]+(to[1]-prev[1])*k);k<1?requestAnimationFrame(f):r()})(t0)});document.querySelectorAll(".sel").forEach(e=>e.classList.remove("sel"));document.querySelectorAll(`.nd[data-id="${id}"]`).forEach(e=>e.classList.add("sel"));info.innerHTML=`<b>${txt}</b>`;prev=to;await new Promise(r=>setTimeout(r,450))}pk.style.opacity=0;busy=false};
+draw();
+/* ── TABLEAU E5 ── */
+const XLB64="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";
+function toggleXl(b){const w=$("#xl-wrap"),o=w.classList.toggle("open");b.textContent=o?"✕ Fermer":"⊞ Visualiser";if(o)w.scrollIntoView({behavior:"smooth",block:"nearest"})}
+function dlXl(){const s=atob(XLB64),u=new Uint8Array(s.length);for(let i=0;i<s.length;i++)u[i]=s.charCodeAt(i);const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([u],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}));a.download="Tableau-de-synthese-E5-BTS-SIO.xlsx";document.body.appendChild(a);a.click();a.remove()}
+</script>
+</body>
+</html>
